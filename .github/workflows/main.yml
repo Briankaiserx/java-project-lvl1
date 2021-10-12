@@ -15,4 +15,4 @@ jobs:
         with:
           java-version: '16'
       - name: Build with Gradle
-        run: make build
+        run: make buildp
