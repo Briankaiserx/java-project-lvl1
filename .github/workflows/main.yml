@@ -1,8 +1,6 @@
 name: Java CI
 
-on:
-  - push
-  - pull_request
+on: [push]
 
 jobs:
   build:
@@ -11,8 +9,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up openJDK
-        uses: actions/setup-java@v1
+        uses: joschi/setup-jdk@v2
         with:
           java-version: '16'
-      - name: Build with Gradle
+      - name: Delete jar-file
+        run: make clean
+      - name: Code lint
+        run: make code-lint
+      - name: Build with Maven
         run: make build
