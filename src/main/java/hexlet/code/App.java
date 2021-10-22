@@ -1,11 +1,51 @@
 package hexlet.code;
 
+import hexlet.code.games.*;
+
+import java.util.Scanner;
+
 public class App {
+
     public static void main(String[] args) {
-        System.out.println("Welcome to the Brain Games!");
-        Cli cli = new Cli();
-        Cli.welcome();
-        System.out.println("Hello, " + Cli.get() + "!");
+
+        String choice;
+        Scanner read = new Scanner(System.in);
+
+        System.out.println("Please enter the game number and press Enter.");
+        System.out.print(" 1 - Greet \n 2 - Even \n 3 - Calc \n 4 - NOD \n 5 - Progression \n 6 - Prime \n 0 - Exit \n Your choice: ");
+        choice = read.nextLine();
+        Engine engine = new Engine();
+        Games game;
+
+        switch (choice) {
+            case "0":
+                System.out.println("Exit");
+                break;
+            case "1":
+                engine.greet();
+                break;
+            case "2":
+                game = new Even();
+                engine.runGames(game);
+                break;
+            case "3":
+                game = new Calc();
+                engine.runGames(game);
+                break;
+            case "4":
+                game = new NOD();
+                engine.runGames(game);
+                break;
+            case "5":
+                game = new Progression();
+                engine.runGames(game);
+                break;
+            case "6":
+                game = new Prime();
+                engine.runGames(game);
+                break;
+
+        }
 
     }
 }

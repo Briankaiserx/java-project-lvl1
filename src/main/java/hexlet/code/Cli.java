@@ -5,14 +5,17 @@ import java.util.Scanner;
 
 public class Cli {
 
+
     private static String name;
-    public static void welcome() {
+
+    public static void read() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("May I have your name? ");
+        System.out.print("May I have your name? ");
         name = scanner.nextLine();
     }
 
     public static String get() {
         return name;
     }
+
 }
