@@ -8,7 +8,7 @@ public final class NOD implements Games<Integer> {
     private int countCorrectAnswer;
     private boolean isCorrectAnswer;
     private static final int MAX_NUMBER = 20;
-    private static final int MAX_NUMBER_OPERATOR = 3;
+    private static final int MAX_NUMBER_OPERATOR = 2;
     private int answer;
     private int correctAnswer;
 
