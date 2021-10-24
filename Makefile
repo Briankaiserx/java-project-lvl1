@@ -1,15 +1,15 @@
-install:	# очистка результатов предыдущей сборки
+install:
 	./gradlew clean install
 
-run-dist:	# запуск исполняемого файла
+run-dist:
 	./build/install/app/bin/app
 
-check-updates:	# проверка обновления зависимостей и плагинов из 1го шага
+check-updates:
 	./gradlew dependencyUpdates
 
-lint:	# проверка стиля кода
+lint:
 	./gradlew checkstyleMain
 
 .PHONY: build
-build:	# сборка проекта
+build:
 	./gradlew clean build
