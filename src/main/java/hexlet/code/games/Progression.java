@@ -27,7 +27,7 @@ public final class Progression implements  Games<Integer> {
         check(answer);
 
     }
-
+//
     public  void printRules() {
         System.out.println("What number is missing in the progression?");
     }
