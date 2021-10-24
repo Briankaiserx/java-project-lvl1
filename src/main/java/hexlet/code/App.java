@@ -23,7 +23,7 @@ public class App {
         choice = read.nextLine();
         Engine engine = new Engine();
         Games game;
-        //Engine.runGames(choice);
+
 
         switch (choice) {
             case "0":

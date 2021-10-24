@@ -5,7 +5,7 @@ import hexlet.code.games.Games;
 public final class Engine {
 
     private  String playerName;
-    private  static final int LIMIT_CORRECT_ANSWERS = 5;
+    private  static final int LIMIT_CORRECT_ANSWERS = 3;
 
 
     private  void setPlayerName() {
