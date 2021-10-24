@@ -8,16 +8,10 @@ check-updates:
 	./gradlew dependencyUpdates
 
 lint:
-	./gradlew checkstyleMain checkstyleTest
+	./gradlew checkstyleMain
 
 build:
-	./gradlew clean build
-
-run:
-	./gradlew run
-
-test:
-	./gradlew test
+	./gradlew build
 
 build-run: build run
 

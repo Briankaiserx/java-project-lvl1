@@ -50,7 +50,9 @@
 
     <!-- Checks whether files end with a new line.                        -->
     <!-- See https://checkstyle.org/config_misc.html#NewlineAtEndOfFile -->
-    <module name="NewlineAtEndOfFile"/>
+        <module name="NewlineAtEndOfFile">
+            <property name="severity" value="ignore" />
+        </module>
 
     <!-- Checks that property files contain the same keys.         -->
     <!-- See https://checkstyle.org/config_misc.html#Translation -->
@@ -174,10 +176,6 @@
         <!-- <module name="FinalParameters"/> -->
         <module name="TodoComment"/>
         <module name="UpperEll"/>
-
-        <module name="Indentation">
-            <property name="basicOffset" value="4"/>
-        </module>
 
         <!-- https://checkstyle.org/config_filters.html#SuppressionXpathFilter -->
         <module name="SuppressionXpathFilter">

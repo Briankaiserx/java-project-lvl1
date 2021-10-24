@@ -25,8 +25,8 @@ public final class Even implements  Games<String> {
     }
 
     private void getQuestion() {
-        Random random = new Random();
-        number = random.nextInt(MAX_NUMBER);
+        Random rn = new Random();
+        number = rn.nextInt(MAX_NUMBER);
         System.out.println("Question: " + number);
         System.out.print("Your answer: ");
     }
@@ -56,26 +56,30 @@ public final class Even implements  Games<String> {
                     correctAnswer = "yes";
                 }
                 break;
+            default:
+                isCorrectAnswer = false;
+                if (x % 2 == 0) {
+                    correctAnswer = "yes";
+                } else {
+                    correctAnswer = "no";
+                }
+                break;
         }
     }
 
     public String getCorrectAnswer() {
-
         return correctAnswer;
     }
 
     public boolean isCorrectAnswer() {
-
         return isCorrectAnswer;
     }
 
     public String getAnswer() {
-
         return answer;
     }
 
     public int getCountCorrectAnswer() {
-
         return countCorrectAnswer;
     }
 }
