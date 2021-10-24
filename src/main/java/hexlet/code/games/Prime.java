@@ -13,7 +13,7 @@ public final class Prime implements  Games<String> {
     private int countCorrectAnswer;
     private boolean isCorrectAnswer;
     private static final int MAX_NUMBER = 100;
-
+//
     @Override
     public void start() {
         getQuestion();
