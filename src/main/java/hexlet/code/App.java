@@ -22,6 +22,7 @@ public class App {
         Prime prime = new Prime();
         Scanner read = new Scanner(System.in);
         String choice = read.nextLine();
+        Cli.read();
         switch (choice) {
             case "0":
                 System.out.println("Exit");
