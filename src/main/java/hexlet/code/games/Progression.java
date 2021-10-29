@@ -1,99 +1,63 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
+import hexlet.code.Cli;
+
 import java.util.Random;
 import java.util.Scanner;
 
-public final class Progression implements  Games<Integer> {
+public final class Progression implements Engine {
 
-    private static final int MAX_LENGHT = 10;
-    private static final int MIN_LENGHT = 5;
-    private static final int MAX_NUMBER = 20;
     private int hiddenPosition;
     private int[] array;
-    private int currentLenght;
-    private int startNumber;
-    private int step;
-    private  int answer;
-    private  int countCorrectAnswer;
-    private  boolean isCorrectAnswer;
-    private  int correctAnswer;
+    private int answer;
+    private int index;
+    private int correctAnswer;
 
-
-
-    @Override
-    public void start() {
-        getQuestion();
-        setAnswer();
-        check(answer);
-
-    }
-//
-    public  void printRules() {
+    public void runGame() {
         System.out.println("What number is missing in the progression?");
-    }
-
-    private  void getQuestion() {
-        Random rn = new Random();
-        currentLenght = MIN_LENGHT + rn.nextInt(MAX_LENGHT - MIN_LENGHT);
-        hiddenPosition = rn.nextInt(currentLenght);
-        array = new int[currentLenght];
-        startNumber = rn.nextInt(MAX_NUMBER);
-        step = rn.nextInt(MAX_NUMBER);
-
-
-        array[0] = startNumber;
-        System.out.print("Question: ");
-
-        for (int i = 0; i < currentLenght; i++) {
-            if (i == 0) {
-                array[i] = startNumber;
+        final int delta = 5;
+        final int sizeLimit = 30;
+        final int progreLimit = 10;
+        for (int i = 0; i < LIMIT_CORRECT_ANSWERS; i++) {
+            Random ran = new Random();
+            int startOfNumber = ran.nextInt(MAX_NUMBER);
+            int step = ran.nextInt(sizeLimit) + 1;
+            int numOfProgre = ran.nextInt(progreLimit) + delta;
+            System.out.print("Question: ");
+            solution(startOfNumber, step, numOfProgre);
+            System.out.println("\nYour answer:");
+            Scanner scanner = new Scanner(System.in);
+            answer = scanner.nextInt();
+            correctAnswer = array[index];
+            if (correctAnswer == answer) {
+                System.out.println("Correct!");
             } else {
-                array[i] = array[0] + i * step;
-            }
-
-            if (i == hiddenPosition) {
-                System.out.print(".. ");
-            } else {
-                System.out.print(array[i] + " ");
+                wrong();
+                return;
             }
         }
-        System.out.println();
-        System.out.print("Your answer: ");
+        System.out.println("Congratulations, " + Cli.get() + "!");
     }
 
-    private  void setAnswer() {
-        Scanner scanner = new Scanner(System.in);
-        answer = scanner.nextInt();
-    }
 
-    private  void check(int inputAnswer) {
-        if (array[hiddenPosition] == inputAnswer) {
-            isCorrectAnswer = true;
-            countCorrectAnswer++;
-        } else {
-            isCorrectAnswer = false;
-            correctAnswer = array[hiddenPosition];
+    public void wrong() {
+        System.out.print("'" + answer + "'" + " is wrong answer :(. Correct answer was '" + correctAnswer
+                + "'.\nLet's try again, " + Cli.get() + "!\n");
+    }
+            public void solution(int a, int b, int c) {
+                array = new int[c];
+                for (int i = 0; i < c; i++) {
+                    array[i] = a + b * i;
+                }
+                Random ran = new Random();
+                index = ran.nextInt(c - 1);
+                for (int i = 0; i < index; i++) {
+                    System.out.print(array[i] + " ");
+                }
+                System.out.print("..");
+                for (int i = index + 1; i < c; i++) {
+                    System.out.print(" " + array[i]);
+                }
+            }
         }
-    }
-
-    @Override
-    public Integer getCorrectAnswer() {
-        return correctAnswer;
-    }
-
-    @Override
-    public  boolean isCorrectAnswer() {
-        return isCorrectAnswer;
-    }
-
-    @Override
-    public  Integer getAnswer() {
-        return answer;
-    }
-
-    @Override
-    public int getCountCorrectAnswer() {
-        return countCorrectAnswer;
-    }
-
-}

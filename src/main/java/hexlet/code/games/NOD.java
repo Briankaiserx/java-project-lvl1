@@ -1,86 +1,73 @@
 package hexlet.code.games;
 
+import hexlet.code.Cli;
+import hexlet.code.Engine;
+
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public final class NOD implements Games<Integer> {
+public final class NOD implements Engine {
 
-    private int countCorrectAnswer;
-    private boolean isCorrectAnswer;
-    private static final int MAX_NUMBER = 20;
-    private static final int MAX_NUMBER_OPERATOR = 2;
-    private int answer;
-    private int correctAnswer;
 
-    private int firstNumber;
-    private int secondNumber;
+    private static int answer;
+    private static int correctAnswer;
+    private static int firstNumber;
+    private static int secondNumber;
 
-    @Override
-    public void start() {
-        getQuestion();
-        setAnswer();
-        check(firstNumber, secondNumber, answer);
 
-    }
-
-    public  void printRules() {
+    public void runGame() {
         System.out.println("Find the greatest common divisor of given numbers.");
-    }
-
-    private  void getQuestion() {
-        Random rn = new Random();
-        firstNumber = rn.nextInt(MAX_NUMBER);
-        secondNumber = rn.nextInt(MAX_NUMBER);
-        System.out.println("Question: " + firstNumber + " " + secondNumber);
-        System.out.print("Your answer: ");
-    }
-
-    private  void setAnswer() {
-        Scanner scanner = new Scanner(System.in);
-        answer = scanner.nextInt();
-    }
-    public static int solution(int a, int b) {
-        if (a == 0) {
-            return b;
-        }
-
-        while (b != 0) {
-            if (a > b) {
-                a = a - b;
+        for (int i = 0; i < LIMIT_CORRECT_ANSWERS; i++) {
+            Random rn = new Random();
+            firstNumber = rn.nextInt(MAX_NUMBER);
+            secondNumber = rn.nextInt(MAX_NUMBER);
+            correctAnswer = solution(firstNumber, secondNumber);
+            System.out.println("Question: " + firstNumber + " " + secondNumber);
+            System.out.print("Your answer: ");
+            Scanner scanner = new Scanner(System.in);
+            answer = scanner.nextInt();
+            if (correctAnswer == answer) {
+                System.out.println("Correct!");
             } else {
-                b = b - a;
+                wrong();
+                return;
             }
         }
-        return a;
+        System.out.println("Congratulations, " + Cli.get() + "!");
     }
 
-    private  void check(int x, int y, int inputAnswer) {
-        if (solution(x, y) == inputAnswer) {
-            isCorrectAnswer = true;
-            countCorrectAnswer++;
-        } else {
-            isCorrectAnswer = false;
-            correctAnswer = solution(x, y);
+    public void wrong() {
+        System.out.print("'" + answer + "'" + " is wrong answer :(. Correct answer was '" + correctAnswer
+                + "'.\nLet's try again, " + Cli.get() + "!\n");
+    }
+
+    public static int solution(int a, int b) {
+        int result = 0;
+        if (a == b) {
+            result = a;
+        } else if (a == 0 | b == 0) {
+            result = Math.max(a, b);
         }
-    }
-
-    @Override
-    public Integer getCorrectAnswer() {
-        return correctAnswer;
-    }
-
-    @Override
-    public boolean isCorrectAnswer() {
-        return isCorrectAnswer;
-    }
-
-    @Override
-    public Integer getAnswer() {
-        return answer;
-    }
-
-    @Override
-    public int getCountCorrectAnswer() {
-        return countCorrectAnswer;
+        ArrayList<Integer> arrayListA = new ArrayList<>();
+        ArrayList<Integer> arrayListB = new ArrayList<>();
+        for (int i = 1; i <= a; i++) {
+            if (a % i == 0) {
+                arrayListA.add(i);
+            }
+        }
+        for (int j = 1; j <= b; j++) {
+            if (b % j == 0) {
+                arrayListB.add(j);
+            }
+        }
+        for (int i = 0; i < arrayListA.size(); i++) {
+            for (int j = 0; j < arrayListB.size(); j++) {
+                if (arrayListA.get(i) == arrayListB.get(j)) {
+                    result = arrayListA.get(i);
+                }
+            }
+        }
+        return result;
     }
 }

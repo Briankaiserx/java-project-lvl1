@@ -1,85 +1,45 @@
 package hexlet.code.games;
 
+import hexlet.code.Cli;
+import hexlet.code.Engine;
+
 import java.util.Random;
 import java.util.Scanner;
 
-public final class Even implements  Games<String> {
+public final class Even implements Engine {
 
-    private String answer;
-    private String correctAnswer;
-    private int number;
+    private static String answer;
+    private static String correctAnswer;
+    private static int number;
 
 
-    private int countCorrectAnswer;
-    private boolean isCorrectAnswer;
-    private static final int MAX_NUMBER = 100;
-
-    public void start() {
-        getQuestion();
-        setAnswer();
-        check(number, answer);
-    }
-
-    public void printRules() {
+    public void runGame() {
         System.out.println("Answer 'yes' if the number is even, otherwise answer 'no'.");
-    }
-
-    private void getQuestion() {
-        Random rn = new Random();
-        number = rn.nextInt(MAX_NUMBER);
-        System.out.println("Question: " + number);
-        System.out.print("Your answer: ");
-    }
-
-    private void setAnswer() {
-        Scanner scanner = new Scanner(System.in);
-        answer = scanner.nextLine();
-    }
-
-    private void check(int x, String inputAnswer) {
-        switch (inputAnswer) {
-            case "yes":
-                if (x % 2 == 0) {
-                    isCorrectAnswer = true;
-                    countCorrectAnswer++;
-                } else {
-                    isCorrectAnswer = false;
-                    correctAnswer = "no";
-                }
-                break;
-            case "no":
-                if (x % 2 != 0) {
-                    isCorrectAnswer = true;
-                    countCorrectAnswer++;
-                } else {
-                    isCorrectAnswer = false;
-                    correctAnswer = "yes";
-                }
-                break;
-            default:
-                isCorrectAnswer = false;
-                if (x % 2 == 0) {
-                    correctAnswer = "yes";
-                } else {
-                    correctAnswer = "no";
-                }
-                break;
+        for (int i = 0; i < LIMIT_CORRECT_ANSWERS; i++) {
+            Random rn = new Random();
+            number = rn.nextInt(MAX_NUMBER);
+           System.out.println("Question: " + number);
+           System.out.print("Your answer: ");
+           Scanner scanner = new Scanner(System.in);
+           answer = scanner.nextLine();
+            if (number % 2 == 0 & answer.equals("yes")
+                    | number % 2 == 1 & answer.equals("no")) {
+                System.out.println("Correct!");
+            } else {
+                wrong();
+                return;
+            }
         }
+        System.out.println("Congratulations, " + Cli.get() + "!");
     }
 
-    public String getCorrectAnswer() {
-        return correctAnswer;
-    }
-
-    public boolean isCorrectAnswer() {
-        return isCorrectAnswer;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public int getCountCorrectAnswer() {
-        return countCorrectAnswer;
+    public void wrong() {
+        if (answer.equals("yes")) {
+            correctAnswer = "no";
+        } else if (answer.equals("no")) {
+            correctAnswer = "yes";
+        }
+        System.out.print("'" + answer + "'" + " is wrong answer :(. Correct answer was '" + correctAnswer
+                + "'.\nLet's try again, " + Cli.get() + "!\n");
     }
 }

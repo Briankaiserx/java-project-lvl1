@@ -1,92 +1,60 @@
 package hexlet.code.games;
 
+import hexlet.code.Cli;
+import hexlet.code.Engine;
+
 import java.util.Random;
 import java.util.Scanner;
 
-public final class Calc implements  Games<Integer> {
+public final class Calc implements Engine {
+
+    private static int answer;
+    private static int correctAnswer;
+
+    private static int firstOperand;
+    private static int secondOperand;
+    private static char[] operators = {'+', '-', '*'};
+    private static char operator;
 
 
-    private  int countCorrectAnswer;
-    private  boolean isCorrectAnswer;
-    private static final int MAX_NUMBER = 20;
-    private static final int MAX_NUMBER_OPERATOR = 2;
-    private  int answer;
-    private  int correctAnswer;
-
-    private  int firstOperand;
-    private  int secondOperand;
-    private  char[] operators = {'+', '-', '*'};
-    private  char operator;
-
-    public  void start() {
-        getQuestion();
-        setAnswer();
-        check(firstOperand, secondOperand, operator, answer);
-    }
-
-
-    public  void printRules() {
+    public void runGame() {
         System.out.println("What is the result of the expression?");
-    }
-
-    private  void getQuestion() {
-        Random rn = new Random();
-        firstOperand = rn.nextInt(MAX_NUMBER);
-        secondOperand = rn.nextInt(MAX_NUMBER);
-        operator = operators[rn.nextInt(MAX_NUMBER_OPERATOR)];
-        System.out.println("Question: " + firstOperand + " " + operator + " " + secondOperand);
-        System.out.print("Your answer: ");
-    }
-
-    private  void setAnswer() {
-        Scanner scanner = new Scanner(System.in);
-        answer = scanner.nextInt();
-    }
-
-    private  void check(int x, int y, char operation, int inputAnswer) {
-        if (solution(x, y, operation) == inputAnswer) {
-            isCorrectAnswer = true;
-            countCorrectAnswer++;
-        } else {
-            isCorrectAnswer = false;
-            correctAnswer = solution(x, y, operation);
+        for (int i = 0; i < LIMIT_CORRECT_ANSWERS; i++) {
+            Random rn = new Random();
+            firstOperand = rn.nextInt(MAX_NUMBER);
+            secondOperand = rn.nextInt(MAX_NUMBER);
+            operator = operators[rn.nextInt(operators.length)];
+            correctAnswer = solution(firstOperand, secondOperand, operator);
+            System.out.println("Question: " + firstOperand + " " + operator + " " + secondOperand);
+            System.out.print("Your answer: ");
+            Scanner scanner = new Scanner(System.in);
+            answer = scanner.nextInt();
+            if (correctAnswer == answer) {
+                System.out.println("Correct!");
+            } else {
+                wrong();
+                return;
+            }
         }
+        System.out.println("Congratulations, " + Cli.get() + "!");
+    }
+
+    public void wrong() {
+        System.out.print("'" + answer + "'" + " is wrong answer :(. Correct answer was '" + correctAnswer
+                + "'.\nLet's try again, " + Cli.get() + "!\n");
     }
 
 
-
-    private  int solution(int x, int y, char operation) {
+    private int solution(int x, int y, char operation) {
         int result = 0;
         switch (operation) {
-            case '*':
-                result = x * y;
-                break;
-            case '+':
-                result = x + y;
-                break;
-            case '-':
-                result = x - y;
-                break;
+            case ('-'):
+                return x - y;
+            case ('+'):
+                return x + y;
             default:
-                System.out.println("Error operator");
+                return x * y;
         }
-        return result;
-    }
 
-
-    public Integer getCorrectAnswer() {
-        return correctAnswer;
+        }
     }
-
-    public  boolean isCorrectAnswer() {
-        return isCorrectAnswer;
-    }
-
-    public  Integer getAnswer() {
-        return answer;
-    }
-
-    public int getCountCorrectAnswer() {
-        return countCorrectAnswer;
-    }
-}

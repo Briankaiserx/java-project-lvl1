@@ -1,103 +1,54 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
+import hexlet.code.Cli;
+
 import java.util.Random;
 import java.util.Scanner;
 
-public final class Prime implements  Games<String> {
+public final class Prime implements Engine {
 
     private String answer;
     private String correctAnswer;
     private int number;
 
-
-    private int countCorrectAnswer;
-    private boolean isCorrectAnswer;
-    private static final int MAX_NUMBER = 100;
-//
-    @Override
-    public void start() {
-        getQuestion();
-        setAnswer();
-        check(number, answer);
-
-    }
-
-    public void printRules() {
+    public void runGame() {
         System.out.println("Answer 'yes' if given number is prime. Otherwise answer 'no'.");
-    }
-
-    private void getQuestion() {
-        Random rn = new Random();
-        number = rn.nextInt(MAX_NUMBER);
-        System.out.println("Question: " + number);
-        System.out.print("Your answer: ");
-    }
-
-    private void setAnswer() {
-        Scanner scanner = new Scanner(System.in);
-        answer = scanner.nextLine();
-    }
-    private  boolean isPrime(int n) {
-        if (n < 2) {
-            return false;
+        for (int i = 0; i < LIMIT_CORRECT_ANSWERS; i++) {
+            Random rn = new Random();
+            number = rn.nextInt(MAX_NUMBER);
+            System.out.println("Question: " + number);
+            System.out.print("Your answer: ");
+            Scanner scanner = new Scanner(System.in);
+            answer = scanner.nextLine();
+            if (isPrime(number) & answer.equals("yes")
+                    | !isPrime(number) & answer.equals("no")) {
+                System.out.println("Correct!");
+            } else {
+                this.wrong();
+                return;
+            }
         }
-        double s = (int) Math.sqrt(n);
-        for (int j = 2; j <= s; j++) {
-            if (n % j == 0) {
+        System.out.println("Congratulations, " + Cli.get() + "!");
+    }
+
+    private boolean isPrime(int n) {
+        for (int i = 2; i < n / 2; i++) {
+            if (n % i == 0) {
                 return false;
             }
         }
         return true;
     }
 
-    private void check(int x, String inputAnswer) {
-        switch (inputAnswer) {
-            case "yes":
-                if (isPrime(x)) {
-                    isCorrectAnswer = true;
-                    countCorrectAnswer++;
-                } else {
-                    isCorrectAnswer = false;
-                    correctAnswer = "no";
-                }
-                break;
-            case "no":
-                if (!isPrime(x)) {
-                    isCorrectAnswer = true;
-                    countCorrectAnswer++;
-                } else {
-                    isCorrectAnswer = false;
-                    correctAnswer = "yes";
-                }
-                break;
-            default:
-                isCorrectAnswer = false;
-                if (isPrime(x)) {
-                    correctAnswer = "yes";
-                } else {
-                    correctAnswer = "no";
-                }
-                break;
+    public void wrong() {
+        if (answer.equals("yes")) {
+            correctAnswer = "no";
+        } else if (answer.equals("no")) {
+            correctAnswer = "yes";
         }
-    }
-
-    @Override
-    public String getCorrectAnswer() {
-        return correctAnswer;
-    }
-
-    @Override
-    public boolean isCorrectAnswer() {
-        return isCorrectAnswer;
-    }
-
-    @Override
-    public String getAnswer() {
-        return answer;
-    }
-
-    @Override
-    public int getCountCorrectAnswer() {
-        return countCorrectAnswer;
+        System.out.print("'" + answer + "'" + " is wrong answer :(. Correct answer was '" + correctAnswer
+                + "'.\nLet's try again, " + Cli.get() + "!\n");
     }
 }
+
