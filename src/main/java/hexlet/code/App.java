@@ -12,40 +12,34 @@ public class App {
 
     public static void main(String[] args) {
         System.out.println("Please enter the game number and press Enter.");
-        System.out.print(" 1 - Greet \n 2 - Even \n 3 - Calc \n 4 - NOD \n "
-                + "5 - Progression \n 6 - Prime \n 0 - Exit \n Your choice: ");
-
-        Even even = new Even();
-        Calc calc = new Calc();
-        NOD nod = new NOD();
-        Progression progression = new Progression();
-        Prime prime = new Prime();
+        String[] choice = {"Exit", "Greet", "Even", "Calc", "NOD", "Progression", "Prime"};
+        for (int i = 1; i < choice.length; i++) {
+            System.out.println(i + " - " + choice[i]);
+        }
+        System.out.println("0 - " + choice[0]);
         Scanner read = new Scanner(System.in);
-        String choice = read.nextLine();
-        Cli.read();
-        switch (choice) {
-            case "0":
-                System.out.println("Exit");
+        System.out.print("Your choice: ");
+        int select = read.nextInt();
+        switch (choice[select]) {
+            case Even.RUNGAME:
+                Even.start();
                 break;
-            case "1":
+            case Calc.RUNGAME:
+                Calc.start();
                 break;
-            case "2":
-                even.runGame();
+            case NOD.RUNGAME:
+                NOD.start();
                 break;
-            case "3":
-                calc.runGame();
+            case Progression.RUNGAME:
+                Progression.start();
                 break;
-            case "4":
-                nod.runGame();
+            case Prime.RUNGAME:
+                Prime.start();
                 break;
-            case "5":
-                progression.runGame();
-                break;
-            case "6":
-                prime.runGame();
-                break;
+            case "Greet":
+                Cli.read();
             default:
-                System.out.println("wrong number :( ");
+                System.exit(0);
         }
 
     }

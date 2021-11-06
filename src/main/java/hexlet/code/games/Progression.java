@@ -1,63 +1,54 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
-import hexlet.code.Cli;
 
-import java.util.Random;
-import java.util.Scanner;
+import static hexlet.code.Engine.MAX_NUMBER;
 
-public final class Progression implements Engine {
+public class Progression {
 
-    private int hiddenPosition;
-    private int[] array;
-    private int answer;
-    private int index;
-    private int correctAnswer;
+    public static final String RUNGAME = "Progression";
+    static final String RULESGAME = "What number is missing in the progression?";
 
-    public void runGame() {
+
+    public static String[] game() {
         System.out.println("What number is missing in the progression?");
         final int delta = 5;
         final int sizeLimit = 30;
         final int progreLimit = 10;
-        for (int i = 0; i < LIMIT_CORRECT_ANSWERS; i++) {
-            Random ran = new Random();
-            int startOfNumber = ran.nextInt(MAX_NUMBER);
-            int step = ran.nextInt(sizeLimit) + 1;
-            int numOfProgre = ran.nextInt(progreLimit) + delta;
-            System.out.print("Question: ");
-            solution(startOfNumber, step, numOfProgre);
-            System.out.println("\nYour answer:");
-            Scanner scanner = new Scanner(System.in);
-            answer = scanner.nextInt();
-            correctAnswer = array[index];
-            if (correctAnswer == answer) {
-                System.out.println("Correct!");
-            } else {
-                wrong();
-                return;
-            }
+
+        int startOfNumber = getRandomNumber(MAX_NUMBER);
+        int step = getRandomNumber(sizeLimit) + 1;
+        int numOfProgre = getRandomNumber(progreLimit) + delta;
+
+        String[] question = new String[numOfProgre];
+
+        for (int i = 0; i < numOfProgre; i++) {
+            int currentNumber = startOfNumber + step * i;
+            question[i] = Integer.toString(currentNumber);
         }
-        System.out.println("Congratulations, " + Cli.get() + "!");
+
+        int indexOfHiddenElement = getRandomNumber(numOfProgre);
+
+        String[] questionAndAnswer = new String[2];
+
+        questionAndAnswer[1] = question[indexOfHiddenElement];
+        question[indexOfHiddenElement] = "..";
+        questionAndAnswer[0] = "".join(" ", question);
+
+        return questionAndAnswer;
+
+    }
+
+    public static int getRandomNumber(int number) {
+        return (int) (Math.random() * number);
     }
 
 
-    public void wrong() {
-        System.out.print("'" + answer + "'" + " is wrong answer :(. Correct answer was '" + correctAnswer
-                + "'.\nLet's try again, " + Cli.get() + "!\n");
-    }
-            public void solution(int a, int b, int c) {
-                array = new int[c];
-                for (int i = 0; i < c; i++) {
-                    array[i] = a + b * i;
-                }
-                Random ran = new Random();
-                index = ran.nextInt(c - 1);
-                for (int i = 0; i < index; i++) {
-                    System.out.print(array[i] + " ");
-                }
-                System.out.print("..");
-                for (int i = index + 1; i < c; i++) {
-                    System.out.print(" " + array[i]);
-                }
-            }
+    public static void start() {
+        String[][] questionAndAnswers = new String[Engine.LIMIT_CORRECT_ANSWERS][0];
+        for (int i = 0; i < Engine.LIMIT_CORRECT_ANSWERS; i++) {
+            questionAndAnswers[i] = game();
         }
+        Engine.start(questionAndAnswers, RULESGAME);
+    }
+}
