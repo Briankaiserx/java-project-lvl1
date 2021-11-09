@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public final class Cli {
 
-    
     public static void greetings() {
         String name;
         System.out.print("Welcome to the Brain Games!\nMay I have your name? ");
@@ -15,4 +14,3 @@ public final class Cli {
     }
 
 }
-
