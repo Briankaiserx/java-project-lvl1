@@ -12,15 +12,15 @@ public class App {
 
     public static void main(String[] args) {
         System.out.println("Please enter the game number and press Enter.");
-        String[] choice = {"Exit", "Greet", "Even", "Calc", "NOD", "Progression", "Prime"};
-        for (int i = 1; i < choice.length; i++) {
-            System.out.println(i + " - " + choice[i]);
+        String[] gameNames = {"Exit", "Greet", "Even", "Calc", "NOD", "Progression", "Prime"};
+        for (int i = 1; i < gameNames.length; i++) {
+            System.out.println(i + " - " + gameNames[i]);
         }
-        System.out.println("0 - " + choice[0]);
+        System.out.println("0 - " + gameNames[0]);
         Scanner read = new Scanner(System.in);
         System.out.print("Your choice: ");
         int select = read.nextInt();
-        switch (choice[select]) {
+        switch (gameNames[select]) {
             case Even.RUNGAME:
                 Even.start();
                 break;
@@ -37,9 +37,9 @@ public class App {
                 Prime.start();
                 break;
             case "Greet":
-                Cli.read();
+                Cli.greetings();
             default:
-                System.exit(0);
+                break;
         }
 
     }

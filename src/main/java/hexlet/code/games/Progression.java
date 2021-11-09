@@ -3,6 +3,7 @@ package hexlet.code.games;
 import hexlet.code.Engine;
 
 import static hexlet.code.Engine.MAX_NUMBER;
+import static hexlet.code.Utils.generateRandom;
 
 public class Progression {
 
@@ -11,14 +12,13 @@ public class Progression {
 
 
     public static String[] game() {
-        System.out.println("What number is missing in the progression?");
         final int delta = 5;
         final int sizeLimit = 30;
         final int progreLimit = 10;
 
-        int startOfNumber = getRandomNumber(MAX_NUMBER);
-        int step = getRandomNumber(sizeLimit) + 1;
-        int numOfProgre = getRandomNumber(progreLimit) + delta;
+        int startOfNumber = generateRandom(MAX_NUMBER);
+        int step = generateRandom(sizeLimit) + 1;
+        int numOfProgre = generateRandom(progreLimit) + delta;
 
         String[] question = new String[numOfProgre];
 
@@ -27,7 +27,7 @@ public class Progression {
             question[i] = Integer.toString(currentNumber);
         }
 
-        int indexOfHiddenElement = getRandomNumber(numOfProgre);
+        int indexOfHiddenElement = generateRandom(numOfProgre);
 
         String[] questionAndAnswer = new String[2];
 
@@ -38,11 +38,6 @@ public class Progression {
         return questionAndAnswer;
 
     }
-
-    public static int getRandomNumber(int number) {
-        return (int) (Math.random() * number);
-    }
-
 
     public static void start() {
         String[][] questionAndAnswers = new String[Engine.LIMIT_CORRECT_ANSWERS][0];

@@ -4,6 +4,7 @@ import hexlet.code.Engine;
 
 import static hexlet.code.Engine.LIMIT_CORRECT_ANSWERS;
 import static hexlet.code.Engine.MAX_NUMBER;
+import static hexlet.code.Utils.generateRandom;
 
 
 public class Calc {
@@ -15,9 +16,9 @@ public class Calc {
         int firstOperand;
         int secondOperand;
         char[] operators = {'+', '-', '*'};
-        firstOperand = getRandomNumber(MAX_NUMBER);
-        secondOperand = getRandomNumber(MAX_NUMBER);
-        char operator = operators[getRandomNumber(operators.length)];
+        firstOperand = generateRandom(MAX_NUMBER);
+        secondOperand = generateRandom(MAX_NUMBER);
+        char operator = operators[generateRandom(operators.length)];
         String answer = String.valueOf(takeResult(operator, firstOperand, secondOperand));
 
         String[] questionAndAnswer = new String[2];
@@ -26,10 +27,6 @@ public class Calc {
         questionAndAnswer[1] = answer;
 
         return questionAndAnswer;
-    }
-
-    public static int getRandomNumber(int number) {
-        return (int) (Math.random() * number);
     }
 
     public static void start() {
