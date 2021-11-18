@@ -3,10 +3,6 @@ package hexlet.code.games;
 import hexlet.code.Engine;
 import hexlet.code.Utils;
 
-import java.util.Random;
-
-
-
 public class Calc extends Utils {
 
     public static final String CALC = "Calc";
