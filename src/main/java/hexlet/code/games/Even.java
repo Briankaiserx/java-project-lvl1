@@ -9,7 +9,6 @@ import static hexlet.code.Utils.generateRandom;
 public class Even {
 
 
-
     public static final String EVEN = "Even";
     static final String RULESGAME = "Answer 'yes' if number even otherwise answer 'no'.";
 
