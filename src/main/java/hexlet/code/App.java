@@ -13,7 +13,7 @@ public class App {
 
     public static void main(String[] args) {
         System.out.println("Please enter the game number and press Enter.");
-        String[] gameNames = {"Exit", "Greet", "Even", "Calc", "GCD", "Progression", "Prime"};
+        String[] gameNames = {"Greet", "Even", "Calc", "GCD", "Progression", "Prime", "Exit"};
         for (int i = 1; i < gameNames.length; i++) {
             System.out.println(i + " - " + gameNames[i]);
         }
