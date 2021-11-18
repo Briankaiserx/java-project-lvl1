@@ -2,49 +2,38 @@ package hexlet.code.games;
 
 import hexlet.code.Engine;
 
-import static hexlet.code.Engine.LIMIT_CORRECT_ANSWERS;
-import static hexlet.code.Engine.MAX_NUMBER;
+import static hexlet.code.Utils.MAX_NUMBER;
 import static hexlet.code.Utils.generateRandom;
 
 
 public class Calc {
 
-    public static final String RUNGAME = "Calc";
+    public static final String CALC = "Calc";
     static final String RULESGAME = "What is the result of the expression?";
-
-    public static String[] game() {
-        int firstOperand;
-        int secondOperand;
-        char[] operators = {'+', '-', '*'};
-        firstOperand = generateRandom(MAX_NUMBER);
-        secondOperand = generateRandom(MAX_NUMBER);
-        char operator = operators[generateRandom(operators.length)];
-        String answer = String.valueOf(takeResult(operator, firstOperand, secondOperand));
-
-        String[] questionAndAnswer = new String[2];
-
-        questionAndAnswer[0] = firstOperand + " " + operator + " " + secondOperand;
-        questionAndAnswer[1] = answer;
-
-        return questionAndAnswer;
-    }
+    private static final char[] OPERARORS = {'+', '-', '*'};
 
     public static void start() {
-        String[][] questionAndAnswers = new String[LIMIT_CORRECT_ANSWERS][0];
-        for (int i = 0; i < LIMIT_CORRECT_ANSWERS; i++) {
-            questionAndAnswers[i] = game();
+        String[] questions = new String[Engine.ROUNDS];
+        String[] answers = new String[Engine.ROUNDS];
+        for (int i = 0; i < Engine.ROUNDS; i++) {
+            int firstOperand = generateRandom(MAX_NUMBER);
+            int secondOperand = generateRandom(MAX_NUMBER);
+            int index = generateRandom(MAX_NUMBER);
+            questions[i] = firstOperand + " " + OPERARORS[index] + " " + secondOperand;
+            answers[i] = takeResult(firstOperand, secondOperand, index);
         }
-        Engine.start(questionAndAnswers, RULESGAME);
+        Engine.start(new String[][]{questions, answers}, RULESGAME);
     }
 
-    private static int takeResult(char operator, int a, int b) {
-        switch (operator) {
+    private static String takeResult(int firstNumber, int secondNumber, int index) {
+
+        switch (OPERARORS[index]) {
             case ('-'):
-                return a - b;
+                return String.valueOf(firstNumber - secondNumber);
             case ('+'):
-                return a + b;
+                return String.valueOf(firstNumber + secondNumber);
             default:
-                return a * b;
+                return String.valueOf(firstNumber * secondNumber);
         }
     }
 }
