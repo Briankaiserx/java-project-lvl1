@@ -1,10 +1,7 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
-import hexlet.code.Utils;
 
-
-import java.util.Random;
 
 import static hexlet.code.Engine.ROUNDS;
 import static hexlet.code.Utils.generateRandom;
