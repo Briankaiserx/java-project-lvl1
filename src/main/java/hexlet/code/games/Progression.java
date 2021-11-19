@@ -1,56 +1,54 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 
-import static hexlet.code.Utils.MAX_NUMBER;
+import java.util.Random;
+
+import static hexlet.code.Engine.ROUNDS;
 import static hexlet.code.Utils.generateRandom;
 
 public class Progression {
 
+    public static final int LENGTH_OF_PROGRESSION = 10;
     public static final String PROGRESSION = "Progression";
     static final String RULESGAME = "What number is missing in the progression?";
-    private static String answer;
 
-    private static int[] progression() {
-        final int delta = 5;
-        final int sizeLimit = 30;
-        final int progreLimit = 10;
-        int startOfNumber = generateRandom(MAX_NUMBER);
-        int step = generateRandom(sizeLimit) + 1;
-        int numOfProgre = generateRandom(progreLimit) + delta;
+    public static String generateQuestion(int[] array, int missingPos) {
+        StringBuilder arrayStr = new StringBuilder();
 
-        int[] question = new int[numOfProgre];
-
-        for (int i = 0; i < numOfProgre; i++) {
-            int currentNumber = startOfNumber + step * i;
-            question[i] = currentNumber;
-        }
-
-        return question;
-    }
-
-    private static String getQuestions(int[] question) {
-        int positionOfAnswer = generateRandom(question.length - 1);
-        answer = String.valueOf(question[positionOfAnswer]);
-
-        StringBuilder stringProgression = new StringBuilder();
-        for (int i = 0; i < question.length; i++) {
-            if (i == positionOfAnswer) {
-                stringProgression.append("..");
+        for (int i = 0; i < array.length; i++) {
+            if (i == missingPos) {
+                arrayStr.append(".. ");
             } else {
-                stringProgression.append(question[i]).append(" ");
+                arrayStr.append(array[i]).append(" ");
             }
         }
-        return stringProgression.toString();
+        return arrayStr.toString();
     }
+
+
+    public static int[] generateProgression(int step, int firstElement, int length) {
+        int[] array = new int[length];
+        array[0] = firstElement;
+        for (int i = 1; i < length; i++) {
+            array[i] = array[i - 1] + step;
+        }
+        return array;
+    }
+
 
     public static void start() {
         String[] questions = new String[Engine.ROUNDS];
         String[] answers = new String[Engine.ROUNDS];
-        for (int i = 0; i < Engine.ROUNDS; i++) {
-            questions[i] = getQuestions(progression());
-            answers[i] = answer;
+        for (int i = 0; i < ROUNDS; i++) {
+            int progressionStep = generateRandom(LENGTH_OF_PROGRESSION);
+            int firstElem = generateRandom(LENGTH_OF_PROGRESSION);
+            int[] array = generateProgression(progressionStep, firstElem, LENGTH_OF_PROGRESSION);
+            int missingPos = generateRandom(LENGTH_OF_PROGRESSION - 1);
+            questions[i] = generateQuestion(array, missingPos);
+            answers[i] = String.valueOf(array[missingPos]);
         }
         Engine.start(new String[][]{questions, answers}, RULESGAME);
     }
