@@ -17,7 +17,7 @@ public class Prime {
         if (number % 2 == 0) {
             return false;
         }
-        for (int i = number / 2; i != 1; i--) {
+        for (int i = number / 2; i > 1; i--) {
                 if (number % i == 0) {
                     return false;
                 }
