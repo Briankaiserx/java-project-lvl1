@@ -24,14 +24,14 @@ public class Calc extends Utils {
     }
 
 
-        private static int takeResult(char operator, int a, int b) {
-            switch (operator) {
-                case ('-'):
-                    return a - b;
-                case ('+'):
-                    return a + b;
-                default:
-                    return a * b;
-            }
+    private static int takeResult(char operator, int a, int b) {
+        switch (operator) {
+            case ('-'):
+                return a - b;
+            case ('+'):
+                return a + b;
+            default:
+                return a * b;
+        }
     }
 }

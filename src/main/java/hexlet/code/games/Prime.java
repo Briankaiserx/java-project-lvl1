@@ -18,12 +18,13 @@ public class Prime {
             return false;
         }
         for (int i = number / 2; i > 1; i--) {
-                if (number % i == 0) {
-                    return false;
-                }
+            if (number % i == 0) {
+                return false;
             }
-            return true;
+        }
+        return true;
     }
+
     public static void start() {
         String[] questions = new String[Engine.ROUNDS];
         String[] answers = new String[Engine.ROUNDS];
