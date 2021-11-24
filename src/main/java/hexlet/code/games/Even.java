@@ -8,7 +8,7 @@ import static hexlet.code.Utils.generateRandom;
 public class Even {
 
     public static final String EVEN = "Even";
-    static final String RULESGAME = "Answer 'yes' if number even otherwise answer 'no'.";
+    static final String RULES_GAME = "Answer 'yes' if number even otherwise answer 'no'.";
 
     public static void start() {
         String[] questions = new String[Engine.ROUNDS];
@@ -18,6 +18,6 @@ public class Even {
             questions[i] = String.valueOf(number);
             answers[i] = number % 2 == 0 ? "yes" : "no";
         }
-        Engine.start(new String[][]{questions, answers}, RULESGAME);
+        Engine.start(new String[][]{questions, answers}, RULES_GAME);
     }
 }

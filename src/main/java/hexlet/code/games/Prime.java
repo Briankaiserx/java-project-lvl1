@@ -8,7 +8,7 @@ import static hexlet.code.Utils.generateRandom;
 public class Prime {
 
     public static final String PRIME = "Prime";
-    static final String RULESGAME = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
+    static final String RULES_GAME = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
 
     public static boolean isPrime(int number) {
         if (number == 2) {
@@ -32,6 +32,6 @@ public class Prime {
             questions[i] = String.valueOf(number);
             answers[i] = isPrime(number) ? "yes" : "no";
         }
-        Engine.start(new String[][]{questions, answers}, RULESGAME);
+        Engine.start(new String[][]{questions, answers}, RULES_GAME);
     }
 }

@@ -9,8 +9,7 @@ public class Engine {
     public static void start(String[][] questionsAndAnswers, String description) {
         System.out.print("Welcome to the Brain Games!\nMay I have your name? ");
         Scanner scanner = new Scanner(System.in);
-        String name;
-        name = scanner.nextLine();
+        String name = scanner.nextLine();
         System.out.print("Hello, " + name + "!");
         System.out.println(description);
 

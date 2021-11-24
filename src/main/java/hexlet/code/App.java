@@ -10,16 +10,23 @@ import java.util.Scanner;
 
 public class App {
 
-static final String[] GAMENAME = {"Exit", "Greet", Even.EVEN, Calc.CALC, GCD.GCD, Progression.PROGRESSION, Prime.PRIME};
+static final String[] GAME_NAMES = {
+        "Exit",
+        "Greet",
+        Even.EVEN,
+        Calc.CALC,
+        GCD.GCD,
+        Progression.PROGRESSION,
+        Prime.PRIME};
 
     public static void main(String[] args) {
-        String[] menu = printMenu();
         System.out.println("Please enter the game number and press Enter.");
+        printMenu();
         Scanner read = new Scanner(System.in);
         System.out.print("Your choice: ");
         int select = read.nextInt();
 
-        switch (menu[select]) {
+        switch (GAME_NAMES[select]) {
             case Even.EVEN:
                 Even.start();
                 break;
@@ -41,12 +48,12 @@ static final String[] GAMENAME = {"Exit", "Greet", Even.EVEN, Calc.CALC, GCD.GCD
                 break;
         }
     }
-        public static String[] printMenu() {
-        for (int i = 1; i < GAMENAME.length; i++) {
-                System.out.println(i + " - " + GAMENAME[i]);
-            }
-            System.out.println("0 - " + GAMENAME[0]);
-            return GAMENAME;
+
+    public static void printMenu() {
+        for (int i = 1; i < GAME_NAMES.length; i++) {
+            System.out.println(i + " - " + GAME_NAMES[i]);
         }
+        System.out.println("0 - " + GAME_NAMES[0]);
     }
+}
 

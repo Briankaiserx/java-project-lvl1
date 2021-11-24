@@ -9,7 +9,7 @@ import static hexlet.code.Utils.generateRandom;
 public class GCD {
 
     public static final String GCD = "GCD";
-    static final String RULESGAME = "Find the greatest common divisor of given numbers.";
+    static final String RULES_GAME = "Find the greatest common divisor of given numbers.";
 
 
     private static String findGCD(int firstNumber, int secondNumber) {
@@ -36,6 +36,6 @@ public class GCD {
             questions[i] = firstNumber + " " + secondNumber;
             answers[i] = findGCD(firstNumber, secondNumber);
         }
-        Engine.start(new String[][]{questions, answers}, RULESGAME);
+        Engine.start(new String[][]{questions, answers}, RULES_GAME);
     }
 }

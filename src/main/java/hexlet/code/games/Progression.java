@@ -10,7 +10,7 @@ public class Progression {
 
 
     public static final String PROGRESSION = "Progression";
-    static final String RULESGAME = "What number is missing in the progression?";
+    static final String RULES_GAME = "What number is missing in the progression?";
     public static final int LENGTH_OF_PROGRESSION = 10;
 
     public static String generateQuestion(int[] array, int missingPos) {
@@ -48,6 +48,6 @@ public class Progression {
             questions[i] = generateQuestion(array, missingPos);
             answers[i] = String.valueOf(array[missingPos]);
         }
-        Engine.start(new String[][]{questions, answers}, RULESGAME);
+        Engine.start(new String[][]{questions, answers}, RULES_GAME);
     }
 }

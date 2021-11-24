@@ -6,7 +6,7 @@ import hexlet.code.Utils;
 public class Calc extends Utils {
 
     public static final String CALC = "Calc";
-    static final String RULESGAME = "What is the result of the expression?";
+    static final String RULES_GAME = "What is the result of the expression?";
     private static final char[] OPERARORS = {'+', '-', '*'};
 
     public static void start() {
@@ -20,7 +20,7 @@ public class Calc extends Utils {
             questions[i] = firstOperand + " " + operator + " " + secondOperand;
             answers[i] = answer;
         }
-        Engine.start(new String[][]{questions, answers}, RULESGAME);
+        Engine.start(new String[][]{questions, answers}, RULES_GAME);
     }
 
 
